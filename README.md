@@ -1,33 +1,50 @@
-# The Audit — submission
+# The Audit — Tokenizer & Serving Stack Review
 
-Start with `NOTEBOOK.md` (chronological log, including the Phase 5 repo
-audit) and `AI_USAGE.md`.
+Submission for FlamAI's AI Team Intern take-home ("The Audit"). Start with
+`NOTEBOOK.md` for the full working log (hypothesis → experiment → result →
+revision) and `AI_USAGE.md` for an honest breakdown of where AI helped and
+where it didn't.
 
-## Layout
-- `partA/` — tokenizer audit
-  - `findings.md` — A2 (script/metric bugs + the conceptual flaw)
-  - `memo.md` — A4 (recommendation memo)
-  - `corpus/` — A1 (UDHR-based, 4 languages, provenance in `corpus/README.md`)
-  - `corrected_analysis/` — A3 (gpt2 + mBERT, two denominators)
-  - `scripts/` — the intern's original `fertility.py`, plus this session's
-    rebuilt, offline, independently-verified evidence for A2
-    (`gpt2_bpe_offline.py`, `verify_a2.py`)
-- `partB/` — capacity reconciliation
-  - `analysis.md` — the write-up (B1–B4), numbers are correct
-  - `calculations.py` — rebuilt this session; run it, it reproduces
-    every number in `analysis.md` from `model_spec.md` + `bench_log.csv`
-  - `EARLIER_ATTEMPT_phase4_do_not_use.md` — kept deliberately as the
-    documented dead end (see NOTEBOOK Phase 5) — the 46-vs-25 discrepancy
-    and why 25 is right
-- `partC/memo.md` — decision memo, grounded in Part A's actual measured
-  tokenizer costs across languages, not hypothetical ones
+## Structure
 
-## Before the defense
-Run these two and be ready to modify them live:
-```
+- `partA/` — Tokenizer fertility audit
+  - `findings.md` — script/metric audit (A2): the code bugs, the conceptual
+    flaw, and the one thing that looks suspicious but isn't
+  - `corpus/` — the multilingual eval corpus (A1), UDHR-based across
+    English, Hindi, Kannada, Tamil; provenance and caveats in `corpus/README.md`
+  - `corrected_analysis/` — corrected cross-language comparison (A3):
+    GPT-2 and mBERT, two denominators
+  - `memo.md` — recommendation memo (A4)
+  - `scripts/` — the original `fertility.py`, plus an independent offline
+    re-implementation (`gpt2_bpe_offline.py`, `verify_a2.py`) used to verify
+    the audit's numbers from scratch
+
+- `partB/` — Capacity reconciliation
+  - `analysis.md` — B1–B4 write-up
+  - `calculations.py` — reproduces every number in `analysis.md` from
+    `model_spec.md` and `bench_log.csv`
+  - `EARLIER_ATTEMPT_phase4_do_not_use.md` — kept intentionally as a
+    documented dead end (see `NOTEBOOK.md`): an earlier pass got the
+    KV-cache capacity number wrong (46 vs. the correct 25) before the
+    memory-budget bug was found
+
+- `partC/memo.md` — decision memo for the casual-tone localization problem
+
+## Reproducing the results
+
+```bash
 cd partA/scripts && python3 verify_a2.py
 cd partB && python3 calculations.py
 ```
-Also worth doing before the defense, not done in this pass (see
-`AI_USAGE.md`): re-verify the mBERT numbers in `partA/corrected_analysis/`
-the same independent way the gpt2 numbers were verified here.
+
+Both scripts regenerate the numbers cited in `findings.md` and `analysis.md`
+independently of the write-ups.
+
+## Before the defense
+
+- Re-run both scripts above from a clean clone, cold.
+- Know why each flagged bug in `fertility.py` distorts the numbers —
+  direction and magnitude, not just "it's wrong."
+- Be ready to walk through the B1 46→25 correction as a live counterfactual.
+- Not yet done: independently re-verify the mBERT numbers in
+  `partA/corrected_analysis/` the same way the GPT-2 numbers were verified.
