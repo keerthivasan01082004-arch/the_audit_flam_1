@@ -1,0 +1,11 @@
+vocab.json entries: 50257 (expected 50257 for GPT-2)
+vocab.json has <|endoftext|>: True (id=50256)
+vocab.json tokens with byte-level space marker U+0120: 33135 (nonzero expected)
+merges.txt first line: '#version: 0.2' (expected version header)
+merges.txt merge rule count: 50000 (expected 50000)
+vocab.txt entries: 119547 (expected 119547 for bert-base-multilingual-cased)
+vocab.txt special tokens present: True
+vocab.txt tokens containing Devanagari: 1852
+vocab.txt tokens containing Tamil: 832
+vocab.txt tokens containing Kannada: 653
+vocab.txt tokens containing basic Latin: 66027

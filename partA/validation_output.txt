@@ -1,0 +1,22 @@
+[PASS] file exists: eng.txt
+[PASS] file exists: hin.txt
+[PASS] file exists: tam.txt
+[PASS] file exists: kan.txt
+[PASS] manifest.tsv exists
+[PASS] utf-8 clean round-trip: eng.txt
+[PASS] utf-8 clean round-trip: hin.txt
+[PASS] utf-8 clean round-trip: tam.txt
+[PASS] utf-8 clean round-trip: kan.txt
+[PASS] same number of aligned lines across all 4 languages — {'eng': 31, 'hin': 31, 'tam': 31, 'kan': 31}
+[PASS] no empty lines: eng.txt
+[PASS] no empty lines: hin.txt
+[PASS] no empty lines: tam.txt
+[PASS] no empty lines: kan.txt
+[PASS] no duplicate lines: eng.txt
+[PASS] no duplicate lines: hin.txt
+[PASS] no duplicate lines: tam.txt
+[PASS] no duplicate lines: kan.txt
+[PASS] manifest line count matches corpus line count — manifest=31 corpus=31
+[PASS] manifest unit_id sequence matches expected preamble+article_01..30 order
+
+RESULT: all checks PASSED. 31 aligned units x 4 languages.
